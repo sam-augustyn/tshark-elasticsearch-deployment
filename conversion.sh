@@ -15,7 +15,9 @@ for filename in pcap/*.pcap; do
     echo "Converting $old ($(sha1sum pcap/$old | sed "s/ .*//")) to $new ($(sha1sum json/$new | sed "s/ .*//"))"
     # original computer that this was written on was connected to an AD realm (can only run cron jobs as root)
     #chown sam json/$new
+    # push the json file to the elasticsearch instance
     curl -s -H "Content-Type: application/x-ndjson" -POST "localhost:9200/_bulk" --data-binary "@json/$new"
+    # removes old file
     rm pcap/$new
     rm json/$new
   fi
