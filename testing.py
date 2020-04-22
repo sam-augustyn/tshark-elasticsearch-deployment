@@ -2,8 +2,9 @@ import pyshark
 
 #pyshark.tshark.tshark.get_tshark_path()
 
-capture = pyshark.LiveCapture(interface='wifi0',tshark_path='/mnt/c/Program Files/Wireshark/tshark.exe')
-capture.sniff(timeout=50)
+capture = pyshark.LiveCapture(interface='wlp2s0')
+
+#capture.set_debug()
 
 for packet in capture.sniff_continuously(packet_count=5):
     print('test')
